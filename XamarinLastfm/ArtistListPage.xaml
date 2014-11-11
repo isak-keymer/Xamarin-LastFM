@@ -2,8 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinLastfm.ArtistListPage">
 	<ContentPage.Content>
   	<StackLayout VerticalOptions="Fill" Padding="10">
-	    <SearchBar x:Name="btnSearch" SearchButtonPressed="OnSearchButtonClicked" VerticalOptions="Start" />
-	    <ListView ItemsSource="{Binding ArtistList}" HorizontalOptions="Center" VerticalOptions="Fill" RowHeight="55" ItemTapped="ItemTapped">
+	    <SearchBar x:Name="btnSearch" SearchButtonPressed="OnSearchButtonClicked" />
+	    <ListView ItemsSource="{Binding ArtistList}" HorizontalOptions="Center" RowHeight="55" ItemTapped="ItemTapped">
 	    <ListView.ItemTemplate>
 	      <DataTemplate>
 	        <ViewCell>
