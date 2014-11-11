@@ -14,7 +14,7 @@ namespace XamarinLastfm
 		public DateTime Published { get; set; }
 		public ImageSource ImageSource { get; set; }
 		public List<AlbumViewModel> Albums { get; set; }
-		public List<string> SimilarArtists { get; set; }
+		public List<SimilarArtistViewModel> SimilarArtists { get; set; }
 	}
 }
 
