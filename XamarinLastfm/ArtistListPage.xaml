@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinLastfm.ArtistListPage">
+	<ContentPage.Content>
+  	<StackLayout VerticalOptions="Fill" Padding="10">
+	    <SearchBar x:Name="btnSearch" SearchButtonPressed="OnSearchButtonClicked" VerticalOptions="Start" />
+	    <ListView ItemsSource="{Binding ArtistList}" HorizontalOptions="Center" VerticalOptions="Fill" RowHeight="55" ItemTapped="ItemTapped">
+	    <ListView.ItemTemplate>
+	      <DataTemplate>
+	        <ViewCell>
+          	<ViewCell.View>
+	            <Label Text="{Binding Name}" Font="20" YAlign="Center" />
+	          </ViewCell.View>
+	        </ViewCell>
+	      </DataTemplate>
+	    </ListView.ItemTemplate>
+	  </ListView>
+	</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

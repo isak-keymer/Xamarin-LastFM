@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinLastfm.ArtistFullInfoPage">
+	<ContentPage.Content>
+		<StackLayout VerticalOptions="Fill" BackgroundColor="Gray" Spacing="10">
+	    	<Label Text="Artist Page" Font="Large" HorizontalOptions="Center" VerticalOptions="Start" />
+	    		<Label Text="{Binding Name}" Font="Bold,Large" />
+	    		<Label Text="{Binding ContentSummary}" Font="16" />
+	    		<Label Text="{Binding YearFormed, StringFormat='{0}'}" Font="18" />
+	    		<Label Text="{Binding Published, StringFormat='{0}'}" Font="18" />
+	    		<Image Source="{Binding ImageSource}" />
+    	</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

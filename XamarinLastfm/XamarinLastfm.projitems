@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{80FC738D-10B6-41F5-9669-C57F24E13D3F}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>XamarinLastfm</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LFMService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Interfaces\IMusicRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Implementations\TestData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\MusicFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Enums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Implementations\LFMWebService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MyPage.xaml.cs">
+      <DependentUpon>MyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LFMArtistListModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ArtistListPage.xaml.cs">
+      <DependentUpon>ArtistListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ArtistListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ArtistFullInfoViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\LFMConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\SearchArtist\ArtistMatches.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\SearchArtist\ArtistSearchResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\SearchArtist\ArtistSearchResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetArtistFullInfo\ArtistGetInfoResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetArtistFullInfo\ArtistFullInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ArtistWebView.cs">
+      <DependentUpon>ArtistWebView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\Artist.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\ImageCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\Biography.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\Image.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumsForArtist\AlbumSearchResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumsForArtist\TopAlbums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumsForArtist\Album.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ArtistFullInfoPage.xaml.cs">
+      <DependentUpon>ArtistFullInfoPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Models\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Data\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\LFMResponses\" />
+    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\LFMResponses\SearchArtist\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetArtistFullInfo\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumsForArtist\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MyPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)ArtistListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)ArtistWebView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)ArtistFullInfoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
