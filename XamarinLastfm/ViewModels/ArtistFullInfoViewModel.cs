@@ -17,6 +17,7 @@ namespace XamarinLastfm
 		public DateTime Published { get; set; }
 		public ImageSource ImageSource { get; set; }
 		public List<AlbumViewModel> Albums { get; set; }
+
 		public List<string> SimilarArtists { get; set; }
 
 		public string Name {
@@ -39,6 +40,9 @@ namespace XamarinLastfm
 				PropertyChanged (this, new PropertyChangedEventArgs (propertyName));
 			}
 		}
+
+		public List<SimilarArtistViewModel> SimilarArtists { get; set; }
+
 	}
 }
 

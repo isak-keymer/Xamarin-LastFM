@@ -55,7 +55,7 @@ namespace XamarinLastfm
 				var albumsToViewModel = albums
 					.Select (alb => new AlbumViewModel { 
 						AlbumName = alb.Name, 
-						ImageSource = ImageSource.FromUri(new Uri(alb.Image.FirstOrDefault(img => img.Size.Equals("small")).Value)) 
+						ImageSource = alb.Image.FirstOrDefault(img => img.Size.Equals("small")).Value 
 					}).Take(10);				
 
 				return albumsToViewModel;
@@ -66,9 +66,16 @@ namespace XamarinLastfm
 		{
 			return Task.Run (() => {
 
+
 				var similarArtists = artist.Similar.Artist.Select (art => art.Name);
 				var imageSource = ImageSource.FromUri(
 									new Uri(artist.Image.FirstOrDefault(img => img.Size.Equals("large")).Value));
+
+				var similarArtists = artist.Similar.Artist.Select (art => 
+					new SimilarArtistViewModel{ Name = art.Name, ImageSource = art.Image.FirstOrDefault(img => img.Size.Equals("small")).Value  });
+
+				var imageSource = artist.Image.FirstOrDefault(img => img.Size.Equals("medium")).Value;
+
 
 				var artistToViewModel = new ArtistFullInfoViewModel {
 					Name= artist.Name,
