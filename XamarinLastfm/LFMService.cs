@@ -68,7 +68,7 @@ namespace XamarinLastfm
 
 				var similarArtists = artist.Similar.Artist.Select (art => art.Name);
 				var imageSource = ImageSource.FromUri(
-									new Uri(artist.Image.FirstOrDefault(img => img.Size.Equals("medium")).Value));
+									new Uri(artist.Image.FirstOrDefault(img => img.Size.Equals("large")).Value));
 
 				var artistToViewModel = new ArtistFullInfoViewModel {
 					Name= artist.Name,

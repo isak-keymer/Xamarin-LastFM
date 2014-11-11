@@ -1,25 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinLastfm.ArtistFullInfoPage">
 	<ContentPage.Content>
-		<StackLayout VerticalOptions="Fill" BackgroundColor="Gray" Spacing="10">
-			<ScrollView>
+		<StackLayout BackgroundColor="Gray">
+<!--		<Label Text="{Binding Name}" Font="Bold,Large" VerticalOptions="Start" />
+		<Image Source="{Binding ImageSource}" Aspect="Fill"  VerticalOptions="Start" />-->
 	    		<Label Text="Artist Page" Font="Large" HorizontalOptions="Center" VerticalOptions="Start" />
 	    		<Label Text="{Binding Name}" Font="Bold,Large" />
-	    		<ListView ItemsSource="{Binding ImageSourceList}" >
-	    			<ListView.ItemTemplate>
-				      <DataTemplate>
-				        <ViewCell>
-			          	<ViewCell.View>
-				            <Image Source="{Binding .}" />
-				          </ViewCell.View>
-				        </ViewCell>
-				      </DataTemplate>
-				    </ListView.ItemTemplate>
-	    		</ListView>
+	    		<Image Source="{Binding ImageSource}" />
 	    		<Label Text="{Binding ContentSummary}" Font="16" />
 	    		<Label Text="{Binding YearFormed, StringFormat='{0}'}" Font="18" />
 	    		<Label Text="{Binding Published, StringFormat='{0}'}" Font="18" />
-	    		<ListView ItemsSource="{Binding AlbumList}" >
+<!--	    		<ListView ItemsSource="{Binding Albums}" >
 	    			<ListView.ItemTemplate>
 				      <DataTemplate>
 				        <ViewCell>
@@ -29,19 +20,7 @@
 				        </ViewCell>
 				      </DataTemplate>
 				    </ListView.ItemTemplate>
-	    		</ListView>
-				<ListView ItemsSource="{Binding SimilarList}" >
-	    			<ListView.ItemTemplate>
-				      <DataTemplate>
-				        <ViewCell>
-			          	<ViewCell.View>
-				            <Image Source="{Binding .}" />
-				          </ViewCell.View>
-				        </ViewCell>
-				      </DataTemplate>
-				    </ListView.ItemTemplate>
-	    		</ListView>
-			</ScrollView>
+	    		</ListView>-->
     	</StackLayout>
 	</ContentPage.Content>
 </ContentPage>
