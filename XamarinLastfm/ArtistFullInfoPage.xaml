@@ -6,8 +6,18 @@
 	    		<Label Text="{Binding Name}" Font="Bold,Large" />
 	    		<Label Text="{Binding ContentSummary}" Font="16" />
 	    		<Label Text="{Binding YearFormed, StringFormat='{0}'}" Font="18" />
+	    		<ListView ItemsSource="{Binding ImageSourceList}" >
+	    			<ListView.ItemTemplate>
+				      <DataTemplate>
+				        <ViewCell>
+			          	<ViewCell.View>
+				            <Image Source="{Binding .}" />
+				          </ViewCell.View>
+				        </ViewCell>
+				      </DataTemplate>
+				    </ListView.ItemTemplate>
+	    		</ListView>
 	    		<Label Text="{Binding Published, StringFormat='{0}'}" Font="18" />
-	    		<Image Source="{Binding ImageSource}" />
     	</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

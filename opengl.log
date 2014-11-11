@@ -8,3 +8,8 @@ Initialized library.
 initOpenGLRenderer(768,1280,003BEC9C,256)
 RenderServer::create creating TCP streamlisten: created loopback server
  started renderer thread.
+initLibrary()
+Initialized library.
+initOpenGLRenderer(768,1280,00F6EA3C,256)
+RenderServer::create creating TCP streamlisten: created loopback server
+ started renderer thread.

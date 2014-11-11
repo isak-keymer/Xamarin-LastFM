@@ -54,7 +54,8 @@ namespace XamarinLastfm
 				ContentSummary = artist.Bio.Summary, 
 				YearFormed = artist.Bio.YearFormed,
 				Published = artist.Bio.Published,
-				//Image = artist.Image.FirstOrDefault(i => i.Size.Equals("small")),
+
+//				ImageSourceList = artist.Image.FirstOrDefault(i => i.Size.Equals("small")),
 				Albums = albumsToViewModel.ToList()
 			};
 			return artistToViewModel;
