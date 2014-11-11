@@ -45,6 +45,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ArtistFullInfoPage.xaml.cs">
       <DependentUpon>ArtistFullInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\SimilarArtist.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
