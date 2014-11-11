@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace XamarinLastfm
 {
@@ -54,8 +55,8 @@ namespace XamarinLastfm
 				var albumsToViewModel = albums
 					.Select (alb => new AlbumViewModel { 
 						AlbumName = alb.Name, 
-						Image = alb.Image.FirstOrDefault(img => img.Size.Equals("small")) })
-					.Take(10);
+						ImageSource = ImageSource.FromUri(new Uri(alb.Image.FirstOrDefault(img => img.Size.Equals("small")).Value)) 
+					}).Take(10);				
 
 				return albumsToViewModel;
 			});
@@ -66,6 +67,8 @@ namespace XamarinLastfm
 			return Task.Run (() => {
 
 				var similarArtists = artist.Similar.Artist.Select (art => art.Name);
+				var imageSource = ImageSource.FromUri(
+									new Uri(artist.Image.FirstOrDefault(img => img.Size.Equals("medium")).Value));
 
 				var artistToViewModel = new ArtistFullInfoViewModel {
 					Name= artist.Name,
@@ -74,7 +77,7 @@ namespace XamarinLastfm
 					ContentSummary = artist.Bio.Summary, 
 					YearFormed = artist.Bio.YearFormed,
 					Published = artist.Bio.Published,
-					//Image = artist.Image.FirstOrDefault(i => i.Size.Equals("small")),
+					ImageSource = imageSource,
 					SimilarArtists = similarArtists.ToList(),
 					Albums = albumsToView.ToList()
 				};

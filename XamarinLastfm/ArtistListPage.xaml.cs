@@ -24,6 +24,7 @@ namespace XamarinLastfm
 		async void OnSearchButtonClicked(object sender, EventArgs args)
 		{
 			var search = btnSearch.Text;
+
 			var artists = await LFMService.Instance.SearchArtist (search);
 
 			_model.ArtistList.Clear ();
