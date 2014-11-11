@@ -41,24 +41,47 @@ namespace XamarinLastfm
 			var artist = await _repository.GetArtistFullInfo (artistName);
 			var albums = await _repository.GetAlbumsForArtist (artistName);
 
-			var albumsToViewModel = albums
-				.Select (alb => new AlbumViewModel { 
-					AlbumName = alb.Name, 
-					Image = alb.Image.FirstOrDefault(i => i.Size.Equals("small")) })
-				.Take(10);
+			var albumsToView = await CreateAlbumViewModel (albums);
+			var artistViewModel = await CreateArtistViewModel (artist, albumsToView);
 
-			var artistToViewModel = new ArtistFullInfoViewModel {
-				Name= artist.Name,
-				Mbid = artist.Mbid,
-				Url = artist.Url,
-				ContentSummary = artist.Bio.Summary, 
-				YearFormed = artist.Bio.YearFormed,
-				Published = artist.Bio.Published,
 
-//				ImageSourceList = artist.Image.FirstOrDefault(i => i.Size.Equals("small")),
-				Albums = albumsToViewModel.ToList()
-			};
-			return artistToViewModel;
+			return artistViewModel;
+		}
+		private Task<IEnumerable<AlbumViewModel>> CreateAlbumViewModel(List<Album> albums)
+		{
+			return Task.Run(() => { 
+
+				var albumsToViewModel = albums
+					.Select (alb => new AlbumViewModel { 
+						AlbumName = alb.Name, 
+						Image = alb.Image.FirstOrDefault(img => img.Size.Equals("small")) })
+					.Take(10);
+
+				return albumsToViewModel;
+			});
+		}
+
+		private Task<ArtistFullInfoViewModel> CreateArtistViewModel (ArtistFullInfo artist, IEnumerable<AlbumViewModel> albumsToView)
+		{
+			return Task.Run (() => {
+
+				var similarArtists = artist.Similar.Artist.Select (art => art.Name);
+
+				var artistToViewModel = new ArtistFullInfoViewModel {
+					Name= artist.Name,
+					Mbid = artist.Mbid,
+					Url = artist.Url,
+					ContentSummary = artist.Bio.Summary, 
+					YearFormed = artist.Bio.YearFormed,
+					Published = artist.Bio.Published,
+					//Image = artist.Image.FirstOrDefault(i => i.Size.Equals("small")),
+					SimilarArtists = similarArtists.ToList(),
+					Albums = albumsToView.ToList()
+				};
+
+				return artistToViewModel;
+			});
+
 		}
 	}
 }

@@ -11,6 +11,7 @@ namespace XamarinLastfm
 		public string Url { get; set; }
 		public string Streamable { get; set; }
 		public ImageCollection Image { get; set; }
+		public SimilarArtists Similar { get; set; }
 	}
 }
 
