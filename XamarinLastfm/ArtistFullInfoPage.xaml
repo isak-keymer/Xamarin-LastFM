@@ -11,6 +11,7 @@
 <!--	    		<Label Text="{Binding ContentSummary}" Font="16" />-->
 	    		<Label Text="{Binding YearFormed, StringFormat='{0}'}" Font="18" />
 	    		<Label Text="{Binding Published, StringFormat='{0}'}" Font="18" />
+	    		<Button Text="View artist on LastFM" Font="18" Clicked="UrlButtonClicked" />
 	    		<Label Text="Artist albums" Font="Large" HorizontalOptions="Center" />
 	    		<ListView ItemsSource="{Binding Albums}" HorizontalOptions="Center" RowHeight="55">
 				    <ListView.ItemTemplate>
@@ -27,7 +28,7 @@
 				    </ListView.ItemTemplate>
 		  		</ListView>
 		  		<Label Text="Similiar artists" Font="Large" HorizontalOptions="Center" />
-				<ListView ItemsSource="{Binding SimilarArtists}" HorizontalOptions="Center" RowHeight="55">
+				<ListView ItemsSource="{Binding SimilarArtists}" ItemTapped="ItemTapped" HorizontalOptions="Center" RowHeight="55">
 				    <ListView.ItemTemplate>
 				      <DataTemplate>
 						<ViewCell>

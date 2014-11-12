@@ -7,10 +7,22 @@ namespace XamarinLastfm
 	public partial class ArtistWebView : ContentPage
 	{	
 		public ArtistWebView (string url)
-		{
-			WebView webView = new WebView { Source = new UrlWebViewSource {	Url = url }	};	
+		{			WebView webView = new WebView
+			{
+				Source = new UrlWebViewSource
+				{
+					Url = url,
+				},
+				VerticalOptions = LayoutOptions.FillAndExpand
+			};
 
-			this.Content = webView;
+			this.Content = new StackLayout
+			{
+				Children =
+				{
+					webView
+				}
+			};
 		}
 	}
 }

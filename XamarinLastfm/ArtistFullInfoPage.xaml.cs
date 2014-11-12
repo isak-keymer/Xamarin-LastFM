@@ -31,7 +31,19 @@ namespace XamarinLastfm
 		{
 			_model = await LFMService.Instance.GetArtistFullInfo (artistName);
 			this.BindingContext = _model;
-//			bulle.Text = _model.Name;
+		}
+
+		async void UrlButtonClicked (object sender, EventArgs args)
+		{
+			var webView = new ArtistWebView(_model.Url);
+			await Navigation.PushAsync(webView);
+		}
+
+		async void ItemTapped(object sender, ItemTappedEventArgs args)
+		{
+			var artist = (SimilarArtistViewModel)args.Item;
+			var fullinfoPage = new ArtistFullInfoPage (artist.Name);
+			await Navigation.PushAsync(fullinfoPage);
 		}
 	}
 }
