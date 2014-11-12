@@ -17,22 +17,17 @@ namespace XamarinLastfm
 			_model = new LFMArtistListModel ();
 
 			this.Title = "Artist Search";
-
 			this.BindingContext = _model;
 		}
 
 		async void OnSearchButtonClicked(object sender, EventArgs args)
 		{
-			var search = btnSearch.Text;
-
-			var artists = await LFMService.Instance.SearchArtist (search);
-
 			_model.ArtistList.Clear ();
 
-			foreach (var artist in artists)
-			{
-				_model.ArtistList.Add (artist);
-			}
+			var search = btnSearch.Text;
+			var artists = await LFMService.Instance.SearchArtist (search);
+
+			_model.ArtistList = artists.ToList ();
 		}
 
 		async void ItemTapped(object sender, ItemTappedEventArgs args)

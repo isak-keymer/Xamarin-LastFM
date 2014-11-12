@@ -66,16 +66,10 @@ namespace XamarinLastfm
 		{
 			return Task.Run (() => {
 
-
-				var similarArtists = artist.Similar.Artist.Select (art => art.Name);
-				var imageSource = ImageSource.FromUri(
-									new Uri(artist.Image.FirstOrDefault(img => img.Size.Equals("large")).Value));
-
 				var similarArtists = artist.Similar.Artist.Select (art => 
 					new SimilarArtistViewModel{ Name = art.Name, ImageSource = art.Image.FirstOrDefault(img => img.Size.Equals("small")).Value  });
 
 				var imageSource = artist.Image.FirstOrDefault(img => img.Size.Equals("medium")).Value;
-
 
 				var artistToViewModel = new ArtistFullInfoViewModel {
 					Name= artist.Name,

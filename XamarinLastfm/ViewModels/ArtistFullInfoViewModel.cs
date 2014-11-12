@@ -9,7 +9,6 @@ namespace XamarinLastfm
 	public class ArtistFullInfoViewModel : INotifyPropertyChanged
 	{
 		private string _name;
-//		public string Name { get; set; }
 		public string Mbid { get; set; }
 		public string Url { get; set; }
 		public string ContentSummary { get; set; }
@@ -17,8 +16,7 @@ namespace XamarinLastfm
 		public DateTime Published { get; set; }
 		public ImageSource ImageSource { get; set; }
 		public List<AlbumViewModel> Albums { get; set; }
-
-		public List<string> SimilarArtists { get; set; }
+		public List<SimilarArtistViewModel> SimilarArtists { get; set; }
 
 		public string Name {
 			get { 
@@ -41,7 +39,7 @@ namespace XamarinLastfm
 			}
 		}
 
-		public List<SimilarArtistViewModel> SimilarArtists { get; set; }
+
 
 	}
 }
