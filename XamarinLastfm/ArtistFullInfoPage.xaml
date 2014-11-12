@@ -1,26 +1,47 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinLastfm.ArtistFullInfoPage">
 	<ContentPage.Content>
-		<StackLayout BackgroundColor="Gray">
+<!--		<ScrollView>-->
+		<StackLayout BackgroundColor="White">
 <!--		<Label Text="{Binding Name}" Font="Bold,Large" VerticalOptions="Start" />
 		<Image Source="{Binding ImageSource}" Aspect="Fill"  VerticalOptions="Start" />-->
-	    		<Label Text="Artist Page" Font="Large" HorizontalOptions="Center" VerticalOptions="Start" />
+	    		<Label Text="Artist Page" Font="Large" HorizontalOptions="Center" />
 	    		<Label Text="{Binding Name}" Font="Bold,Large" />
 	    		<Image Source="{Binding ImageSource}" />
-	    		<Label Text="{Binding ContentSummary}" Font="16" />
+<!--	    		<Label Text="{Binding ContentSummary}" Font="16" />-->
 	    		<Label Text="{Binding YearFormed, StringFormat='{0}'}" Font="18" />
 	    		<Label Text="{Binding Published, StringFormat='{0}'}" Font="18" />
-<!--	    		<ListView ItemsSource="{Binding Albums}" >
-	    			<ListView.ItemTemplate>
+	    		<Label Text="Artist albums" Font="Large" HorizontalOptions="Center" />
+	    		<ListView ItemsSource="{Binding Albums}" HorizontalOptions="Center" RowHeight="55">
+				    <ListView.ItemTemplate>
 				      <DataTemplate>
-				        <ViewCell>
-			          	<ViewCell.View>
-				            <Image Source="{Binding .}" />
-				          </ViewCell.View>
-				        </ViewCell>
+						<ViewCell>
+							<StackLayout Orientation="Horizontal" Padding="0,5,0,5">
+								<Image Source="{Binding ImageSource}" WidthRequest="40" Aspect="AspectFill" />
+								<StackLayout Padding="5,0,0,0" Orientation="Vertical">
+				            		<Label Text="{Binding AlbumName}" Font="20" YAlign="Center" />
+				            	</StackLayout>        	
+				      		</StackLayout>
+				      	</ViewCell>
 				      </DataTemplate>
 				    </ListView.ItemTemplate>
-	    		</ListView>-->
+		  		</ListView>
+		  		<Label Text="Similiar artists" Font="Large" HorizontalOptions="Center" />
+				<ListView ItemsSource="{Binding SimilarArtists}" HorizontalOptions="Center" RowHeight="55">
+				    <ListView.ItemTemplate>
+				      <DataTemplate>
+						<ViewCell>
+							<StackLayout Orientation="Horizontal" Padding="0,5,0,5">
+								<Image Source="{Binding ImageSource}" WidthRequest="40" Aspect="AspectFill" />
+								<StackLayout Padding="5,0,0,0" Orientation="Vertical">
+				            		<Label Text="{Binding Name}" Font="20" YAlign="Center" />
+				            	</StackLayout>        	
+				      		</StackLayout>
+				      	</ViewCell>
+				      </DataTemplate>
+				    </ListView.ItemTemplate>
+		  		</ListView>
     	</StackLayout>
+<!--		</ScrollView>-->
 	</ContentPage.Content>
 </ContentPage>
