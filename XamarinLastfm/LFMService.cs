@@ -32,7 +32,11 @@ namespace XamarinLastfm
 		{
 			var artists = await _repository.SearchArtist (search);
 
-			var artistsToViewModel = artists.Select (artist => new ArtistListViewModel { Name = artist.Name, Mbid = artist.Mbid } );
+			var artistsToViewModel = artists.Select (artist => new ArtistListViewModel { 
+				Name = artist.Name, 
+				Mbid = artist.Mbid,
+				Image = artist.Image.FirstOrDefault(img => img.Size.Equals("Small")).Value			
+			} );
 
 			return artistsToViewModel;
 		}

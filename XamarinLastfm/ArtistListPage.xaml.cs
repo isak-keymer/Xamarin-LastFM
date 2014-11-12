@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace XamarinLastfm
 {	
@@ -27,7 +28,9 @@ namespace XamarinLastfm
 			var search = btnSearch.Text;
 			var artists = await LFMService.Instance.SearchArtist (search);
 
-			_model.ArtistList = artists.ToList ();
+			if (!artists == null) {
+				_model.ArtistList = new ObservableCollection<ArtistListViewModel>(artists);
+			}
 		}
 
 		async void ItemTapped(object sender, ItemTappedEventArgs args)
