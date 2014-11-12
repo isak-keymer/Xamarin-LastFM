@@ -28,7 +28,7 @@ namespace XamarinLastfm
 			var search = btnSearch.Text;
 			var artists = await LFMService.Instance.SearchArtist (search);
 
-			if (!artists == null) {
+			if (artists != null) {
 				_model.ArtistList = new ObservableCollection<ArtistListViewModel>(artists);
 			}
 		}

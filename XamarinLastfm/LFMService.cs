@@ -35,7 +35,7 @@ namespace XamarinLastfm
 			var artistsToViewModel = artists.Select (artist => new ArtistListViewModel { 
 				Name = artist.Name, 
 				Mbid = artist.Mbid,
-				Image = artist.Image.FirstOrDefault(img => img.Size.Equals("Small")).Value			
+				Image = artist.Image.FirstOrDefault(img => img.Size.Equals("Small")).Value					
 			} );
 
 			return artistsToViewModel;
