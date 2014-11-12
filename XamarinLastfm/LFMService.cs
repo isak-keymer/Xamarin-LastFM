@@ -28,9 +28,9 @@ namespace XamarinLastfm
 			}
 		}
 
-		public async Task<IEnumerable<ArtistListViewModel>> SearchArtist(string search)
+		public async Task<IEnumerable<ArtistListViewModel>> SearchArtist(string search, int? index = null)
 		{
-			var artists = await _repository.SearchArtist (search);
+			var artists = await _repository.SearchArtist (search, index);
 
 			var artistsToViewModel = artists.Select (artist => new ArtistListViewModel { 
 				Name = artist.Name, 

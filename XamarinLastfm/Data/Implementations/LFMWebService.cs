@@ -44,7 +44,8 @@ namespace XamarinLastfm
 					request.AddParameter(requestedType, requestParam);
 					request.AddParameter("api_key",  LFMConfig.LFMKey );
 					request.AddParameter("format", "json");
-					if (string.IsNullOrEmpty(limit)) {
+
+					if (!string.IsNullOrEmpty(limit)) {
 						request.AddParameter("limit", limit);
 					}
 					if (page != null) {

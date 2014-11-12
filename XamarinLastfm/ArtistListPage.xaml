@@ -3,7 +3,7 @@
 	<ContentPage.Content>
   	<StackLayout VerticalOptions="Fill" Padding="10">
 	    <SearchBar x:Name="btnSearch" SearchButtonPressed="OnSearchButtonClicked" />
-	    <ListView ItemsSource="{Binding ArtistList}" HorizontalOptions="Center" RowHeight="55" ItemTapped="ItemTapped">
+	    <ListView ItemsSource="{Binding ArtistList}" ItemAppearing="ScrollItemAppearing" HorizontalOptions="Center" RowHeight="55" ItemTapped="ItemTapped">
 	    <ListView.ItemTemplate>
 	      <DataTemplate>
 			<ViewCell>

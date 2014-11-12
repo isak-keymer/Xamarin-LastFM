@@ -9,7 +9,8 @@ namespace XamarinLastfm
 	public partial class ArtistListPage : ContentPage
 	{	
 		private LFMArtistListModel _model;
-		//private int _startIndex = 0;
+		private int _startIndex = 0;
+		private string searchTerm;
 
 		public ArtistListPage ()
 		{
@@ -24,9 +25,10 @@ namespace XamarinLastfm
 		async void OnSearchButtonClicked(object sender, EventArgs args)
 		{
 			_model.ArtistList.Clear ();
+			_startIndex = 1;
 
-			var search = btnSearch.Text;
-			var artists = await LFMService.Instance.SearchArtist (search);
+			searchTerm = btnSearch.Text;
+			var artists = await LFMService.Instance.SearchArtist (searchTerm, _startIndex);
 
 			foreach (var artist in artists) {
 				_model.ArtistList.Add (artist);
@@ -40,16 +42,19 @@ namespace XamarinLastfm
 			await Navigation.PushAsync(fullinfoPage);
 		}
 
-		void ScrollItemAppering(object sender, ItemVisibilityEventArgs args)
+		async void ScrollItemAppearing(object sender, ItemVisibilityEventArgs args)
 		{
 			var item = (ArtistListViewModel)args.Item;
 
-			if (item.Mbid == _model.ArtistList.Last().Mbid) {
+			if (item.Equals(_model.ArtistList.Last())) 
+			{
+				var artists = await LFMService.Instance.SearchArtist (searchTerm, ++_startIndex);
 
-				// Här vill vi lägga till fler sökresultat sen för en "endlessscroll"
+				foreach (var artist in artists) {
+					_model.ArtistList.Add (artist);
+				}
 			}
 		}
-
 	}
 }
 
