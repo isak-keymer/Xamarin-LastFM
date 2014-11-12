@@ -52,7 +52,7 @@ namespace XamarinLastfm
 			);
 		}
 			
-		public async Task<IEnumerable<Artist>> SearchArtist (string artistToSearch)
+		public async Task<IEnumerable<Artist>> SearchArtist (string artistToSearch, int? page = null)
 		{
 			return await Task.Run(() =>
 				{

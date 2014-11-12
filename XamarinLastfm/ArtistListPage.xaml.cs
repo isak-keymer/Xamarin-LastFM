@@ -28,8 +28,8 @@ namespace XamarinLastfm
 			var search = btnSearch.Text;
 			var artists = await LFMService.Instance.SearchArtist (search);
 
-			if (artists != null) {
-				_model.ArtistList = new ObservableCollection<ArtistListViewModel>(artists);
+			foreach (var artist in artists) {
+				_model.ArtistList.Add (artist);
 			}
 		}
 
@@ -45,6 +45,7 @@ namespace XamarinLastfm
 			var item = (ArtistListViewModel)args.Item;
 
 			if (item.Mbid == _model.ArtistList.Last().Mbid) {
+
 				// Här vill vi lägga till fler sökresultat sen för en "endlessscroll"
 			}
 		}
