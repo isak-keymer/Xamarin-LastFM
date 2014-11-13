@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
+using System.Text.RegularExpressions;
+using System.Text;
+using System.Globalization;
 
 namespace XamarinLastfm
 {
@@ -74,11 +77,15 @@ namespace XamarinLastfm
 
 				var imageSource = artist.Image.LastOrDefault().Value;
 
+				var contentNoHTML =  Regex.Replace(artist.Bio.Summary, "<.*?>", string.Empty);
+				var contentSummary = Regex.Replace(contentNoHTML, "Read more about.*", string.Empty);
+
+
 				var artistToViewModel = new ArtistFullInfoViewModel {
 					Name= artist.Name,
 					Mbid = artist.Mbid,
 					Url = artist.Url,
-					ContentSummary = artist.Bio.Summary, 
+					ContentSummary = contentSummary.Trim(), 
 					YearFormed = artist.Bio.YearFormed,
 					Published = artist.Bio.Published,
 					ImageSource = imageSource,
