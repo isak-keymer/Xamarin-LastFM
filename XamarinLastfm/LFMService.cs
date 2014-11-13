@@ -54,6 +54,42 @@ namespace XamarinLastfm
 
 			return artistViewModel;
 		}
+
+		public async Task<List<AlbumListViewModel>> SearchAlbum(string album, int? index = null)
+		{
+			var albums = await _repository.SearchAlbums ("believe", index);
+
+			var albumsToListView = albums
+				.Select (alb => new AlbumListViewModel { 
+				Name = alb.Name, 
+				Image = alb.Image.FirstOrDefault ().Value 
+			});
+
+			return albumsToListView.ToList();
+		}
+
+		public async Task<AlbumFullInfoViewModel> GetAlbumFullInfo (string albumName, string albumMbid, string artistName)
+		{
+			var album = await _repository.GetAlbumFullInfo(albumName, albumMbid, artistName);
+
+			if (album.Tracks.TrackList == null) {
+				album.Tracks.TrackList = new List<Track> { new Track { Name = "Track 1", Artist = new Artist { Name = "Abba" }},
+					new Track { Name = "Track 2", Artist = new Artist { Name = "Abba2" }},
+					new Track { Name = "Track 3", Artist = new Artist { Name = "Abba3" }},
+					new Track { Name = "Track 4", Artist = new Artist { Name = "Abba4" }}};
+			}
+
+			var albumToView = new AlbumFullInfoViewModel {
+				Name= album.Name,
+				Id = album.Id,
+				ReleaseDate = album.ReleaseDate.ToShortDateString(),
+				ImageSource = album.Image.LastOrDefault().Value,
+				Tracks = album.Tracks.TrackList
+			};
+
+			return albumToView;
+		}
+			
 		private Task<IEnumerable<AlbumViewModel>> CreateAlbumViewModel(List<Album> albums)
 		{
 			return Task.Run(() => { 
@@ -61,8 +97,9 @@ namespace XamarinLastfm
 				var albumsToViewModel = albums
 					.Select (alb => new AlbumViewModel { 
 						AlbumName = alb.Name, 
-						ImageSource = alb.Image.FirstOrDefault(img => img.Size.Equals("small")).Value 
-					}).Take(10);				
+						Mbid = alb.Mbid,
+						ImageSource = alb.Image.FirstOrDefault().Value 
+					});				
 
 				return albumsToViewModel;
 			});
