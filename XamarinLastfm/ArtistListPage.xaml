@@ -1,13 +1,15 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinLastfm.ArtistListPage">
 	<ContentPage.Content>
+
   	<StackLayout VerticalOptions="Fill" Padding="10">
 	    <SearchBar x:Name="btnSearch" SearchButtonPressed="OnSearchButtonClicked" />
-	    <ListView ItemsSource="{Binding ArtistList}" ItemAppearing="ScrollItemAppearing" HorizontalOptions="Center" RowHeight="55" ItemTapped="ItemTapped">
+	    <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" />
+	    <ListView x:Name="lst" ItemsSource="{Binding ArtistList}" ItemAppearing="ScrollItemAppearing" HorizontalOptions="Center" RowHeight="55" ItemTapped="ItemTapped">
 	    <ListView.ItemTemplate>
 	      <DataTemplate>
 			<ViewCell>
-				<StackLayout Orientation="Horizontal" Padding="0,5,0,5">
+				<StackLayout Orientation="Horizontal" Padding="0,5,0,5" >
 					<Image Source="{Binding Image}" WidthRequest="40" Aspect="AspectFill" />
 					<StackLayout Padding="5,0,0,0" Orientation="Vertical">
 	            		<Label Text="{Binding Name}" Font="20" YAlign="Center" />
