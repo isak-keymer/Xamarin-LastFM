@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace XamarinLastfm
 {	
-	public partial class ArtistFullInfoPage : ContentPage
+	public partial class ArtistFullInfoPage : TabbedPage
 	{	
 		private ArtistFullInfoViewModel _model;
 

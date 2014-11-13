@@ -1,56 +1,4 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinLastfm.ArtistFullInfoPage">
-	<ContentPage.Content>
-<!--		<ScrollView>-->
-		<StackLayout>
-		 <!--		<Label Text="{Binding Name}" Font="Bold,Large" VerticalOptions="Start" />		-->
-	    		<Label Text="Artist Page" Font="Large" HorizontalOptions="Center" />
-	    		<Label Text="{Binding Name}" Font="Bold,Large" />
-	    		  <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-    			    <Image Source="{Binding ImageSource}" Aspect="Fill" VerticalOptions="Start" />
-    			  </StackLayout>
-				<StackLayout>
-					<Label Text="{Binding ContentSummary}" Font="16" />
-				</StackLayout>		
-	    		<Label Text="{Binding YearFormed, StringFormat='{0}'}" Font="18" />
-	    		<Label Text="{Binding Published, StringFormat='{0}'}" Font="18" />
-	    		<Button Text="View artist on LastFM" Font="18" Clicked="UrlButtonClicked" />
-	    		<Label Text="Artist albums" Font="Large" HorizontalOptions="Center" />
-	    		<ListView ItemsSource="{Binding Albums}" HorizontalOptions="Center" RowHeight="55">
-				    <ListView.ItemTemplate>
-				      <DataTemplate>
-						<ViewCell>
-							<StackLayout Orientation="Horizontal" Padding="0,5,0,5">
-								<Image Source="{Binding ImageSource}" WidthRequest="40" Aspect="AspectFill" />
-								<StackLayout Padding="5,0,0,0" Orientation="Vertical">
-				            		<Label Text="{Binding AlbumName}" Font="20" YAlign="Center" />
-				            	</StackLayout>        	
-				      		</StackLayout>
-				      	</ViewCell>
-				      </DataTemplate>
-				    </ListView.ItemTemplate>
-		  		</ListView>
-		  		<Label Text="Similiar artists" Font="Large" HorizontalOptions="Center" />
-				<ListView ItemsSource="{Binding SimilarArtists}" ItemTapped="ItemTapped" HorizontalOptions="Center" RowHeight="55">
-				    <ListView.ItemTemplate>
-				      <DataTemplate>
-						<ViewCell>
-							<StackLayout Orientation="Horizontal" Padding="0,5,0,5">
-								<Image Source="{Binding ImageSource}" WidthRequest="40" Aspect="AspectFill" />
-								<StackLayout Padding="5,0,0,0" Orientation="Vertical">
-				            		<Label Text="{Binding Name}" Font="20" YAlign="Center" />
-				            	</StackLayout>        	
-				      		</StackLayout>
-				      	</ViewCell>
-				      </DataTemplate>
-				    </ListView.ItemTemplate>
-		  		</ListView>
-    	</StackLayout>
-<!--		</ScrollView>-->
-	</ContentPage.Content>
-</ContentPage>
-
-<!--<?xml version="1.0" encoding="UTF-8"?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinLastfm.ArtistFullInfoPage">
 	<TabbedPage.Children>
 		<ContentPage Title="info">
@@ -101,4 +49,4 @@
 				</ListView>
               </ContentPage>
        </TabbedPage.Children>
-</TabbedPage>-->
+</TabbedPage>
