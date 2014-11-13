@@ -28,6 +28,11 @@ namespace XamarinLastfm
 			this.BindingContext = _model;
 
 			_model.IsLoading = false;
+
+			this.Icon = "lastfmlogo48.png";
+
+			NavigationPage.SetTitleIcon(this, this.Icon);
+
 		}
 
 		async void OnSearchButtonClicked(object sender, EventArgs args)

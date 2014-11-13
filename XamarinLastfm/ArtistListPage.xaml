@@ -2,23 +2,25 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinLastfm.ArtistListPage">
 	<ContentPage.Content>
 
-  	<StackLayout VerticalOptions="Fill" Padding="10">
-	    <SearchBar x:Name="btnSearch" SearchButtonPressed="OnSearchButtonClicked" />
+  	<StackLayout VerticalOptions="Fill" BackgroundColor="White">
+	    <SearchBar x:Name="btnSearch" SearchButtonPressed="OnSearchButtonClicked" BackgroundColor="#E31B23" HeightRequest="55"/>
 	    <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" />
-	    <ListView x:Name="lst" ItemsSource="{Binding ArtistList}" ItemAppearing="ScrollItemAppearing" HorizontalOptions="Center" RowHeight="55" ItemTapped="ItemTapped">
+	    <StackLayout Padding="10,0,10,0">
+	    <ListView ItemsSource="{Binding ArtistList}" ItemAppearing="ScrollItemAppearing" HorizontalOptions="Center" RowHeight="55" ItemTapped="ItemTapped">
 	    <ListView.ItemTemplate>
 	      <DataTemplate>
 			<ViewCell>
 				<StackLayout Orientation="Horizontal" Padding="0,5,0,5" >
 					<Image Source="{Binding Image}" WidthRequest="40" Aspect="AspectFill" />
-					<StackLayout Padding="5,0,0,0" Orientation="Vertical">
-	            		<Label Text="{Binding Name}" Font="20" YAlign="Center" />
+					<StackLayout Padding="5,0,0,0" Orientation="Vertical" VerticalOptions="Center">
+	            		<Label Text="{Binding Name}" Font="20" YAlign="Center" TextColor="#333"/>
 	            	</StackLayout>        	
 	      		</StackLayout>
 	      	</ViewCell>
 	      </DataTemplate>
 	    </ListView.ItemTemplate>
-	  </ListView>
+	  	</ListView>
+		</StackLayout>
 	</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

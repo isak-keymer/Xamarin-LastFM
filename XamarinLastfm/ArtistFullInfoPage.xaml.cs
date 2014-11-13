@@ -18,6 +18,10 @@ namespace XamarinLastfm
 			_model = new ArtistFullInfoViewModel ();
 
 			GetArtist (artistName);
+
+			this.Icon = "lastfmlogo48.png";
+
+			NavigationPage.SetTitleIcon(this, this.Icon);
 		}
 
 		async void GetArtist(string artistName)

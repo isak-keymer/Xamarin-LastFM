@@ -72,6 +72,5 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)ArtistFullInfoPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)lastfmlogo.png" />
   </ItemGroup>
 </Project>

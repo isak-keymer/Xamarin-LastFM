@@ -80,6 +80,7 @@
     <AndroidResource Include="Resources\layout\Main.axml" />
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable\Icon.png" />
+    <AndroidResource Include="Resources\drawable\lastfmlogo48.png" />
   </ItemGroup>
   <Import Project="..\XamarinLastfm\XamarinLastfm.projitems" Label="Shared" Condition="Exists('..\XamarinLastfm\XamarinLastfm.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
