@@ -9,6 +9,8 @@ namespace XamarinLastfm
 		Task<IEnumerable<Artist>> SearchArtist(string artistToSearch, int? page = null);
 		Task<ArtistFullInfo> GetArtistFullInfo(string artistName);
 		Task<List<Album>> GetAlbumsForArtist (string artistName);
+		Task<List<SearchedAlbum>> SearchAlbums (string album, int? page = null);
+		Task<AlbumFullInfo> GetAlbumFullInfo (string album, string albumMbid, string artistName);
 	}
 }
 

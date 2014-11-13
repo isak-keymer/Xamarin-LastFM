@@ -6,6 +6,7 @@ namespace XamarinLastfm
 	public class AlbumViewModel
 	{
 		public string AlbumName { get; set; }
+		public string Mbid { get; set; }
 		public ImageSource ImageSource { get; set; }
 	}
 }

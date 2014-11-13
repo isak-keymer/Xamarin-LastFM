@@ -77,5 +77,15 @@ namespace XamarinLastfm
 			throw new NotImplementedException ();
 		}
 
+		public  Task<List<SearchedAlbum>> SearchAlbums (string album, int? page = null)
+		{
+			throw new NotImplementedException ();
+		}
+
+		public  Task<AlbumFullInfo> GetAlbumFullInfo (string album, string albumMbid, string artistName)
+		{
+			throw new NotImplementedException ();
+		}
+
 	}
 }

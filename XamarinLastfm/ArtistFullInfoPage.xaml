@@ -12,12 +12,11 @@
 					<Label Text="{Binding YearFormed, StringFormat='{0}'}" Font="18" />
 					<Label Text="{Binding Published, StringFormat='{0}'}" Font="18" />
 					<Button Text="View artist on LastFM" Font="18" Clicked="UrlButtonClicked" />
-					<Label Text="Artist albums" Font="Large" HorizontalOptions="Center" />
 				</StackLayout>
 			</ScrollView>
 		</ContentPage> 
               <ContentPage Title="Albums">
-              		<ListView ItemsSource="{Binding Albums}" HorizontalOptions="Center" RowHeight="55">
+              		<ListView ItemsSource="{Binding Albums}" ItemTapped="AlbumItemTapped" HorizontalOptions="Center" RowHeight="55">
 				    <ListView.ItemTemplate>
 				      <DataTemplate>
 						<ViewCell>
@@ -33,7 +32,7 @@
 				</ListView>
               </ContentPage>
               <ContentPage Title="Similar">
-              		<ListView ItemsSource="{Binding SimilarArtists}" ItemTapped="ItemTapped" HorizontalOptions="Center" RowHeight="55">
+              		<ListView ItemsSource="{Binding SimilarArtists}" ItemTapped="SimilarArtistItemTapped" HorizontalOptions="Center" RowHeight="55">
 				    <ListView.ItemTemplate>
 				      <DataTemplate>
 						<ViewCell>

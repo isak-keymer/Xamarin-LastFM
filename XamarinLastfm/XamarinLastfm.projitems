@@ -47,6 +47,19 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\SimilarArtist.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SimilarArtistViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\SearchAlbums\SearchedAlbum.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\SearchAlbums\SearchedAlbumResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\SearchAlbums\SearchedAlbumMatches.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\SearchAlbums\AlbumSearchResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AlbumFullInfoPage.xaml.cs">
+      <DependentUpon>AlbumFullInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumFullInfoViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumFullInfo\AlbumGetInfoResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumFullInfo\AlbumFullInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumFullInfo\Track.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumFullInfo\Tracks.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
@@ -58,6 +71,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetArtistFullInfo\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumsForArtist\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumFullInfo\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MyPage.xaml">
@@ -70,6 +84,9 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)ArtistFullInfoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)AlbumFullInfoPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

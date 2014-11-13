@@ -28,7 +28,6 @@ namespace XamarinLastfm
 		{
 			_model = await LFMService.Instance.GetArtistFullInfo (artistName);
 			this.BindingContext = _model;
-
 		}
 
 		async void UrlButtonClicked (object sender, EventArgs args)
@@ -37,10 +36,17 @@ namespace XamarinLastfm
 			await Navigation.PushAsync(webView);
 		}
 
-		async void ItemTapped(object sender, ItemTappedEventArgs args)
+		async void SimilarArtistItemTapped(object sender, ItemTappedEventArgs args)
 		{
 			var artist = (SimilarArtistViewModel)args.Item;
 			var fullinfoPage = new ArtistFullInfoPage (artist.Name);
+			await Navigation.PushAsync(fullinfoPage);
+		}
+
+		async void AlbumItemTapped(object sender, ItemTappedEventArgs args)
+		{
+			var album = (AlbumViewModel)args.Item;
+			var fullinfoPage = new AlbumFullInfoPage (album.AlbumName, album.Mbid, _model.Name);
 			await Navigation.PushAsync(fullinfoPage);
 		}
 	}

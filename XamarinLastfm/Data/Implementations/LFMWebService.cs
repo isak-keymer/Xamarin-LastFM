@@ -10,7 +10,7 @@ namespace XamarinLastfm
 	{
 		public async Task<IEnumerable<Artist>> SearchArtist (string artistToSearch, int? page = null)
 		{
-			var request = await CreateRestRequest ("artist.search", "artist", artistToSearch, "10", page); 
+			var request = await CreateRestRequest ("artist.search", "artist", artistToSearch, 10, page); 
 			var response = await ReceiveRestResponse<ArtistSearchResponse> (request);
 			var artists = response.Results.Artistmatches.Artists;
 			return artists;
@@ -34,8 +34,27 @@ namespace XamarinLastfm
 			return albums;
 		}
 
+		public async Task<List<SearchedAlbum>> SearchAlbums (string album, int? page = null)
+		{
+			var request = await CreateRestRequest ("album.search", "album", album, 10, page ); 
+			var response = await ReceiveRestResponse<AlbumSearchResult> (request);
+			var albums = response.Results.AlbumMatches.Albums;
+
+			return albums;
+		}
+
+		public async Task<AlbumFullInfo> GetAlbumFullInfo (string albumName, string albumMbid, string artistName)
+		{
+			var request = await CreateRestRequest ("album.getInfo", "album", albumName, null, null, albumMbid, artistName ); 
+			var response = await ReceiveRestResponse<AlbumGetInfoResponse> (request);
+			var album = response.Album;
+
+			return album;
+		}
+
 		// Method for creating request and add parameters to the request
-		public Task<RestRequest> CreateRestRequest(string LFMMethod, string requestedType, string requestParam, string limit = "", int? page = null  )
+		public Task<RestRequest> CreateRestRequest(string LFMMethod, string requestedType, string requestParam, 
+			int? limit = null, int? page = null, string mbid = "", string artistName = ""  )
 		{
 			return Task.Run (() => 
 				{
@@ -45,11 +64,17 @@ namespace XamarinLastfm
 					request.AddParameter("api_key",  LFMConfig.LFMKey );
 					request.AddParameter("format", "json");
 
-					if (!string.IsNullOrEmpty(limit)) {
+					if (limit != null) {
 						request.AddParameter("limit", limit);
 					}
 					if (page != null) {
 						request.AddParameter("page", page.ToString());
+					}
+					if (!string.IsNullOrEmpty(mbid)) {
+						request.AddParameter("mbid", mbid);
+					}
+					if (!string.IsNullOrEmpty(artistName)) {
+						request.AddParameter("artist", artistName);
 					}
 
 					return request;
