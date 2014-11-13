@@ -2,12 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinLastfm.ArtistFullInfoPage">
 	<ContentPage.Content>
 <!--		<ScrollView>-->
-		<StackLayout BackgroundColor="White">
-<!--		<Label Text="{Binding Name}" Font="Bold,Large" VerticalOptions="Start" />
-		<Image Source="{Binding ImageSource}" Aspect="Fill"  VerticalOptions="Start" />-->
+		<StackLayout>
+		 <!--		<Label Text="{Binding Name}" Font="Bold,Large" VerticalOptions="Start" />		-->
 	    		<Label Text="Artist Page" Font="Large" HorizontalOptions="Center" />
 	    		<Label Text="{Binding Name}" Font="Bold,Large" />
-	    		<Image Source="{Binding ImageSource}" />
+	    		  <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+    			    <Image Source="{Binding ImageSource}" Aspect="Fill" VerticalOptions="Start" />
+    			  </StackLayout>
 <!--	    		<Label Text="{Binding ContentSummary}" Font="16" />-->
 	    		<Label Text="{Binding YearFormed, StringFormat='{0}'}" Font="18" />
 	    		<Label Text="{Binding Published, StringFormat='{0}'}" Font="18" />

@@ -49,7 +49,6 @@ namespace XamarinLastfm
 			var albumsToView = await CreateAlbumViewModel (albums);
 			var artistViewModel = await CreateArtistViewModel (artist, albumsToView);
 
-
 			return artistViewModel;
 		}
 		private Task<IEnumerable<AlbumViewModel>> CreateAlbumViewModel(List<Album> albums)
@@ -71,9 +70,9 @@ namespace XamarinLastfm
 			return Task.Run (() => {
 
 				var similarArtists = artist.Similar.Artist.Select (art => 
-					new SimilarArtistViewModel{ Name = art.Name, ImageSource = art.Image.FirstOrDefault(img => img.Size.Equals("small")).Value  });
+					new SimilarArtistViewModel{ Name = art.Name, ImageSource = art.Image.FirstOrDefault().Value  });
 
-				var imageSource = artist.Image.FirstOrDefault(img => img.Size.Equals("medium")).Value;
+				var imageSource = artist.Image.LastOrDefault().Value;
 
 				var artistToViewModel = new ArtistFullInfoViewModel {
 					Name= artist.Name,
