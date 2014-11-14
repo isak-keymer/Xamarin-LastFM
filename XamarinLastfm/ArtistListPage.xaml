@@ -6,7 +6,7 @@
 	    <SearchBar x:Name="btnSearch" SearchButtonPressed="OnSearchButtonClicked" BackgroundColor="#E31B23" HeightRequest="55"/>
 	    <ActivityIndicator IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" />
 	    <StackLayout Padding="10,0,10,0">
-	    <ListView ItemsSource="{Binding ArtistList}" ItemAppearing="ScrollItemAppearing" HorizontalOptions="Center" RowHeight="55" ItemTapped="ItemTapped">
+	    <ListView ItemsSource="{Binding ArtistList}" ItemAppearing="ScrollItemAppearing" HorizontalOptions="Center" RowHeight="65" ItemTapped="ItemTapped">
 	    <ListView.ItemTemplate>
 	      <DataTemplate>
 			<ViewCell>

@@ -3,23 +3,23 @@
 	<TabbedPage.Children>
 		<ContentPage Title="Album Info">
   			<ScrollView>
-          		<StackLayout>
-					<Label Text="Album Page" Font="Large" HorizontalOptions="Center" />
-					<Label Text="{Binding Name, StringFormat='Album name: {0}'}" Font="Bold,Large" />
+          		<StackLayout BackgroundColor="White">
+					<Label Text="Album Page" Font="Large" HorizontalOptions="Center" TextColor="#333" />
+					<Label Text="{Binding Name, StringFormat='Album name: {0}'}" Font="Bold,Large" TextColor="#333"/>
 					<Image Source="{Binding ImageSource}" />
-					<Label Text="{Binding ReleaseDate, StringFormat='Release date: {0}'}" Font="18" />
+					<Label Text="{Binding ReleaseDate, StringFormat='Release date: {0}'}" Font="18" TextColor="#333" />
 				</StackLayout>
 			</ScrollView>
 		</ContentPage> 
-              <ContentPage Title="Tracks">
+              <ContentPage Title="Tracks" BackgroundColor="White">
               		<ListView ItemsSource="{Binding Tracks}" HorizontalOptions="Center" RowHeight="55">
 				    <ListView.ItemTemplate>
 				      <DataTemplate>
 						<ViewCell>
 							<StackLayout Orientation="Horizontal" Padding="0,5,0,5">
 								<StackLayout Padding="5,0,0,0" Orientation="Vertical">
-								<Label Text="{Binding Artist.Name, StringFormat='Artist {0}'}" Font="20" YAlign="Center" />
-				            		<Label Text="{Binding Name, StringFormat='Track: {0}'}" Font="20" YAlign="Center" />
+								<Label Text="{Binding Artist.Name, StringFormat='Artist {0}'}" Font="20" YAlign="Center" TextColor="#333" />
+				            		<Label Text="{Binding Name, StringFormat='Track: {0}'}" Font="20" YAlign="Center" TextColor="#333" />
 				            	</StackLayout>        	
 				      		</StackLayout>
 				      	</ViewCell>

@@ -1,29 +1,29 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="XamarinLastfm.ArtistFullInfoPage">
 	<TabbedPage.Children>
-		<ContentPage Title="info">
+		<ContentPage Title="info" BackgroundColor="White">
   			<ScrollView>
-          		<StackLayout>
-					<Label Text="{Binding Name}" Font="Bold,Large" />
-					<Label Text="Artist Page" Font="Large" HorizontalOptions="Center" />
-					<Label Text="{Binding Name}" Font="Bold,Large" />
+          		<StackLayout BackgroundColor="White" Padding="10,0">
+					<Label Text="{Binding Name}" Font="Bold,Large" TextColor="#333" XAlign="Center" />
+					<Label Text="Artist Page" Font="Large" HorizontalOptions="Center" TextColor="#333" />
+<!--					<Label Text="{Binding Name}" Font="Bold,Large" />-->
 					<Image Source="{Binding ImageSource}" />
-					<Label Text="{Binding ContentSummary}" Font="16" />
-					<Label Text="{Binding YearFormed, StringFormat='{0}'}" Font="18" />
-					<Label Text="{Binding Published, StringFormat='{0}'}" Font="18" />
-					<Button Text="View artist on LastFM" Font="18" Clicked="UrlButtonClicked" />
+					<Label Text="{Binding ContentSummary}" Font="16" TextColor="#333" />
+					<Label Text="{Binding YearFormed, StringFormat='Formed: {0}'}" Font="18" TextColor="#333" />
+					<Label Text="{Binding Published, StringFormat='First published: {0}'}" Font="18" TextColor="#333" />
+					<Button Text="View artist on LastFM" Font="18" Clicked="UrlButtonClicked" BackgroundColor="#E31B23" />
 				</StackLayout>
 			</ScrollView>
 		</ContentPage> 
-              <ContentPage Title="Albums">
+              <ContentPage Title="Albums" BackgroundColor="White">
               		<ListView ItemsSource="{Binding Albums}" ItemTapped="AlbumItemTapped" HorizontalOptions="Center" RowHeight="55">
 				    <ListView.ItemTemplate>
 				      <DataTemplate>
 						<ViewCell>
-							<StackLayout Orientation="Horizontal" Padding="0,5,0,5">
+							<StackLayout Orientation="Horizontal" Padding="0,5,0,5" BackgroundColor="White">
 								<Image Source="{Binding ImageSource}" WidthRequest="40" Aspect="AspectFill" />
 								<StackLayout Padding="5,0,0,0" Orientation="Vertical">
-				            		<Label Text="{Binding AlbumName}" Font="20" YAlign="Center" />
+				            		<Label Text="{Binding AlbumName}" Font="20" YAlign="Center" TextColor="#333" />
 				            	</StackLayout>        	
 				      		</StackLayout>
 				      	</ViewCell>
@@ -31,7 +31,7 @@
 				    </ListView.ItemTemplate>
 				</ListView>
               </ContentPage>
-              <ContentPage Title="Similar">
+              <ContentPage Title="Similar" BackgroundColor="White">
               		<ListView ItemsSource="{Binding SimilarArtists}" ItemTapped="SimilarArtistItemTapped" HorizontalOptions="Center" RowHeight="55">
 				    <ListView.ItemTemplate>
 				      <DataTemplate>
@@ -39,7 +39,7 @@
 							<StackLayout Orientation="Horizontal" Padding="0,5,0,5">
 								<Image Source="{Binding ImageSource}" WidthRequest="40" Aspect="AspectFill" />
 								<StackLayout Padding="5,0,0,0" Orientation="Vertical">
-				            		<Label Text="{Binding Name}" Font="20" YAlign="Center" />
+				            		<Label Text="{Binding Name}" Font="20" YAlign="Center" TextColor="#333" />
 				            	</StackLayout>        	
 				      		</StackLayout>
 				      	</ViewCell>
