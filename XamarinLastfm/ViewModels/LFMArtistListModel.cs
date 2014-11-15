@@ -9,16 +9,20 @@ namespace XamarinLastfm
 	{			
 		public LFMArtistListModel ()
 		{
-			ArtistList = new ObservableCollection<ArtistListViewModel> ();
+			SearchResult = new ObservableCollection<ViewModel> ();
+			GroupedItems = new ObservableCollection<Group<string, ViewModel>> ();
 		}
-		public ObservableCollection<ArtistListViewModel> ArtistList { get; set;}
+
+		public ObservableCollection<Group<string,ViewModel>> GroupedItems { get; set;} 
+
+		public ObservableCollection<ViewModel> SearchResult { get; set;}
 
 		private bool _isLoading;
 
 		public bool IsLoading 
 		{
 			get { return _isLoading; }
-		
+
 			set { 
 				_isLoading = value;
 				OnPropertyChanged ("IsLoading");
@@ -34,29 +38,3 @@ namespace XamarinLastfm
 		}
 	}
 }
-
-
-
-//		private List<ArtistListViewModel> _artistList;
-//
-//		public LFMArtistListModel ()
-//		{
-//			_artistList = new List<ArtistListViewModel> ();
-//		}
-//
-//		public List<ArtistListViewModel> ArtistList {
-//			get
-//			{ 
-//				return _artistList;		
-//			}
-//
-//			set
-//			{ 
-//				if (_artistList != value)
-//				{
-//					_artistList = value;
-//					OnPropertyChanged("ArtistList");
-//				}
-//			}
-//		}
-//

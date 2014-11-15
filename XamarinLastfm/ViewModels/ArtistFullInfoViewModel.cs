@@ -13,10 +13,10 @@ namespace XamarinLastfm
 		public string Url { get; set; }
 		public string ContentSummary { get; set; }
 		public int YearFormed { get; set; }
-		public DateTime Published { get; set; }
+		public string Published { get; set; }
 		public ImageSource ImageSource { get; set; }
-		public List<AlbumViewModel> Albums { get; set; }
-		public List<SimilarArtistViewModel> SimilarArtists { get; set; }
+		public IEnumerable<ViewModel> Albums { get; set; }
+		public IEnumerable<ViewModel> SimilarArtists { get; set; }
 
 		public string Name {
 			get { 
@@ -38,9 +38,6 @@ namespace XamarinLastfm
 				PropertyChanged (this, new PropertyChangedEventArgs (propertyName));
 			}
 		}
-
-
-
 	}
 }
 

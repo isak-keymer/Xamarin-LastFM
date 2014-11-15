@@ -7,8 +7,7 @@ namespace XamarinLastfm
 	public class TopAlbums
 	{
 		[DeserializeAs(Name = "album")]
-		public List<Album> Albums { get; set; }
+		public List<ArtistTopAlbum> Albums { get; set; }
 	}
-
 }
 

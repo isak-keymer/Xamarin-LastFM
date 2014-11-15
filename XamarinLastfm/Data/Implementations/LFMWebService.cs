@@ -8,9 +8,9 @@ namespace XamarinLastfm
 {
 	public class LFMWebService : IMusicRepository
 	{
-		public async Task<IEnumerable<Artist>> SearchArtist (string artistToSearch, int? page = null)
+		public async Task<IEnumerable<Artist>> SearchArtists (string artistToSearch, int numberOfResults, int? page = null)
 		{
-			var request = await CreateRestRequest ("artist.search", "artist", artistToSearch, 10, page); 
+			var request = await CreateRestRequest ("artist.search", "artist", artistToSearch, numberOfResults, page); 
 			var response = await ReceiveRestResponse<ArtistSearchResponse> (request);
 			var artists = response.Results.Artistmatches.Artists;
 			return artists;
@@ -25,7 +25,7 @@ namespace XamarinLastfm
 			return artist;
 		}
 
-		public async Task<List<Album>> GetAlbumsForArtist (string artistName)
+		public async Task<IEnumerable<ArtistTopAlbum>> GetAlbumsForArtist (string artistName)
 		{
 			var request = await CreateRestRequest ("artist.gettopalbums", "artist", artistName); 
 			var response = await ReceiveRestResponse<AlbumSearchResponse> (request);
@@ -34,9 +34,9 @@ namespace XamarinLastfm
 			return albums;
 		}
 
-		public async Task<List<SearchedAlbum>> SearchAlbums (string album, int? page = null)
+		public async Task<IEnumerable<SearchedAlbum>> SearchAlbums (string album, int numberOfResults, int? page = null)
 		{
-			var request = await CreateRestRequest ("album.search", "album", album, 10, page ); 
+			var request = await CreateRestRequest ("album.search", "album", album, numberOfResults, page ); 
 			var response = await ReceiveRestResponse<AlbumSearchResult> (request);
 			var albums = response.Results.AlbumMatches.Albums;
 

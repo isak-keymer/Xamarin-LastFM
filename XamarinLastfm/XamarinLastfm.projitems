@@ -16,9 +16,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\MusicFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\Implementations\LFMWebService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MyPage.xaml.cs">
-      <DependentUpon>MyPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LFMArtistListModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ArtistListPage.xaml.cs">
       <DependentUpon>ArtistListPage.xaml</DependentUpon>
@@ -38,15 +35,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\ImageCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\Biography.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\Image.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumsForArtist\AlbumSearchResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumsForArtist\TopAlbums.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumsForArtist\Album.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ArtistFullInfoPage.xaml.cs">
       <DependentUpon>ArtistFullInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\SimilarArtist.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SimilarArtistViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\SearchAlbums\SearchedAlbum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\SearchAlbums\SearchedAlbumResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\SearchAlbums\SearchedAlbumMatches.cs" />
@@ -60,6 +54,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumFullInfo\AlbumFullInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumFullInfo\Track.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumFullInfo\Tracks.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\Album.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\Response.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumsForArtist\ArtistTopAlbum.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\Group.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
@@ -74,9 +73,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumFullInfo\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MyPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)ArtistListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>

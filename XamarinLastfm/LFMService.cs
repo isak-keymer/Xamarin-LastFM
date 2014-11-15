@@ -31,17 +31,17 @@ namespace XamarinLastfm
 			}
 		}
 
-		public async Task<IEnumerable<ArtistListViewModel>> SearchArtist(string search, int? index = null)
+		public async Task<IEnumerable<ViewModel>> Search(string search, int numberOfResults, int? page = null)
 		{
-			var artists = await _repository.SearchArtist (search, index);
+			var artists = await _repository.SearchArtists (search, numberOfResults, page);
+			var albums = await _repository.SearchAlbums (search, numberOfResults, page);
 
-			var artistsToViewModel = artists.Select (artist => new ArtistListViewModel { 
-				Name = artist.Name, 
-				Mbid = artist.Mbid,
-				Image = artist.Image.FirstOrDefault(img => img.Size.Equals("small")).Value					
-			} );
+			var artistsToViewModel = await CreateArtistListViewModel (artists);
+			var albumsToViewModel = await CreateSearchedAlbumListViewModel (albums);
 
-			return artistsToViewModel;
+			var viewModelList = artistsToViewModel.Concat(albumsToViewModel);
+
+			return viewModelList;
 		}
 
 		public async Task<ArtistFullInfoViewModel> GetArtistFullInfo(string artistName)
@@ -49,23 +49,10 @@ namespace XamarinLastfm
 			var artist = await _repository.GetArtistFullInfo (artistName);
 			var albums = await _repository.GetAlbumsForArtist (artistName);
 
-			var albumsToView = await CreateAlbumViewModel (albums);
-			var artistViewModel = await CreateArtistViewModel (artist, albumsToView);
+			var albumsToViewModel = await CreateAlbumListForArtistViewModel(albums);
+			var artistToViewModel = await CreateArtistFullViewModel (artist, albumsToViewModel);
 
-			return artistViewModel;
-		}
-
-		public async Task<List<AlbumListViewModel>> SearchAlbum(string album, int? index = null)
-		{
-			var albums = await _repository.SearchAlbums ("believe", index);
-
-			var albumsToListView = albums
-				.Select (alb => new AlbumListViewModel { 
-				Name = alb.Name, 
-				Image = alb.Image.FirstOrDefault ().Value 
-			});
-
-			return albumsToListView.ToList();
+			return artistToViewModel;
 		}
 
 		public async Task<AlbumFullInfoViewModel> GetAlbumFullInfo (string albumName, string albumMbid, string artistName)
@@ -79,7 +66,7 @@ namespace XamarinLastfm
 					new Track { Name = "Track 4", Artist = new Artist { Name = "Abba4" }}};
 			}
 
-			var albumToView = new AlbumFullInfoViewModel {
+			var albumToView =  new AlbumFullInfoViewModel {
 				Name= album.Name,
 				Id = album.Id,
 				ReleaseDate = album.ReleaseDate.ToShortDateString(),
@@ -89,50 +76,102 @@ namespace XamarinLastfm
 
 			return albumToView;
 		}
-			
-		private Task<IEnumerable<AlbumViewModel>> CreateAlbumViewModel(List<Album> albums)
+
+
+		// Additional methods
+		private Task<IEnumerable<ViewModel>> CreateArtistListViewModel(IEnumerable<Artist> artists)
 		{
 			return Task.Run(() => { 
 
-				var albumsToViewModel = albums
-					.Select (alb => new AlbumViewModel { 
-						AlbumName = alb.Name, 
-						Mbid = alb.Mbid,
-						ImageSource = alb.Image.FirstOrDefault().Value 
-					});				
-
-				return albumsToViewModel;
+				var viewModel = artists
+					.Select (artist => new ViewModel { 
+						Name = artist.Name, 
+						Mbid = artist.Mbid,
+						ImageSource = artist.Image.FirstOrDefault().Value,
+						Type = "Artist"
+					});	
+				return viewModel;
 			});
 		}
 
-		private Task<ArtistFullInfoViewModel> CreateArtistViewModel (ArtistFullInfo artist, IEnumerable<AlbumViewModel> albumsToView)
+		private Task<IEnumerable<ViewModel>> CreateAlbumListForArtistViewModel(IEnumerable<ArtistTopAlbum> albums)
+		{
+			return Task.Run(() => { 
+
+				var viewModel = albums
+					.Select (album => new ViewModel { 
+						Name = album.Name, 
+						Mbid = album.Mbid,
+						ImageSource = album.Image.FirstOrDefault().Value,
+						Type = "Album",
+						Artist = album.Artist.Name
+					});	
+
+				return viewModel;
+			});
+		}
+
+		private Task<IEnumerable<ViewModel>> CreateSearchedAlbumListViewModel(IEnumerable<SearchedAlbum> albums)
+		{
+			return Task.Run(() => { 
+
+				var viewModel = albums
+					.Select (album => new ViewModel { 
+						Name = album.Name, 
+						Mbid = album.Mbid,
+						ImageSource = album.Image.FirstOrDefault().Value,
+						Type = "Album",
+						Artist = album.Artist
+					});	
+
+				return viewModel;
+			});
+		}
+
+		private Task<IEnumerable<Group<string, ViewModel>>> CreateGroupedViewModel (IEnumerable<ViewModel> artistsToViewModel, IEnumerable<ViewModel> albumsToViewModel)
+		{
+			return Task.Run (() => {
+				var viewModelList = artistsToViewModel.Concat(albumsToViewModel);
+
+				var sortedItems = viewModelList
+					.GroupBy (vm => vm.Type)
+					.Select (vm => new Group<string, ViewModel> (vm.Key, vm));
+
+				return sortedItems;
+			});
+		}
+
+		private async Task<ArtistFullInfoViewModel> CreateArtistFullViewModel (ArtistFullInfo artist, IEnumerable<ViewModel> albums)
+		{
+			var similarArtists = await CreateArtistListViewModel (artist.Similar.Artist);
+			var imageSource = artist.Image.LastOrDefault().Value;
+			var content = await FilterContent (artist.Bio.Summary);
+
+			var artistToViewModel = new ArtistFullInfoViewModel {
+				Name= artist.Name,
+				Mbid = artist.Mbid,
+				Url = artist.Url,
+				ContentSummary = content, 
+				YearFormed = artist.Bio.YearFormed,
+				Published = artist.Bio.Published.ToShortDateString(),
+				ImageSource = imageSource,
+				SimilarArtists = similarArtists,
+				Albums = albums
+			};
+
+			return artistToViewModel;
+		}
+
+		private Task<string> FilterContent (string summary)
 		{
 			return Task.Run (() => {
 
-				var similarArtists = artist.Similar.Artist.Select (art => 
-					new SimilarArtistViewModel{ Name = art.Name, ImageSource = art.Image.FirstOrDefault().Value  });
+				var contentNoHTML = Regex.Replace (summary, "<.*?>", string.Empty);
+				var contentSummary = Regex.Replace (contentNoHTML, "Read more about.*", string.Empty);
+				contentSummary.Trim ();
 
-				var imageSource = artist.Image.LastOrDefault().Value;
-
-				var contentNoHTML =  Regex.Replace(artist.Bio.Summary, "<.*?>", string.Empty);
-				var contentSummary = Regex.Replace(contentNoHTML, "Read more about.*", string.Empty);
-
-
-				var artistToViewModel = new ArtistFullInfoViewModel {
-					Name= artist.Name,
-					Mbid = artist.Mbid,
-					Url = artist.Url,
-					ContentSummary = contentSummary.Trim(), 
-					YearFormed = artist.Bio.YearFormed,
-					Published = artist.Bio.Published,
-					ImageSource = imageSource,
-					SimilarArtists = similarArtists.ToList(),
-					Albums = albumsToView.ToList()
-				};
-
-				return artistToViewModel;
+				return contentSummary;
 			});
-
 		}
 	}
 }

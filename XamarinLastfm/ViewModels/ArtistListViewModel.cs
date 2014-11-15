@@ -3,11 +3,8 @@ using Xamarin.Forms;
 
 namespace XamarinLastfm
 {
-	public class ArtistListViewModel
+	public class ArtistListViewModel : ViewModel
 	{
-		public ImageSource Image { get; set; }
-		public string Name { get; set; }
-		public string Mbid { get; set; }
 	}
 }
 

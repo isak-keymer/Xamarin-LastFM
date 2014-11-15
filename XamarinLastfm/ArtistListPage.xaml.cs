@@ -4,7 +4,6 @@ using Xamarin.Forms;
 using System.Linq;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Android.Widget;
 
 namespace XamarinLastfm
 {	
@@ -14,13 +13,14 @@ namespace XamarinLastfm
 		private int _startIndex = 0;
 		private string searchTerm;
 
-		private int previousListCount  = 0;
-		private int itemsVisibleThreshold = 2;
-
 		public ArtistListPage ()
 		{
 			InitializeComponent ();
+			CreateModelAndSetBinding ();
+		}
 
+		void CreateModelAndSetBinding ()
+		{
 			_model = new LFMArtistListModel ();
 			_model.IsLoading = true;
 
@@ -32,71 +32,108 @@ namespace XamarinLastfm
 			this.Icon = "lastfmlogo48.png";
 
 			NavigationPage.SetTitleIcon(this, this.Icon);
-
 		}
 
 		async void OnSearchButtonClicked(object sender, EventArgs args)
 		{
+			await SearchAsync (sender, args);
+		}
+
+		async Task SearchAsync (object sender, EventArgs args)
+		{
 			_model.IsLoading = true;
 
-			await SearchForArtistAndBindViewModel ();
+			var viewModel = await GetSearchResult ();
+			await BindViewModel (viewModel);
 
+			btnLoadMoreResults.IsVisible = true;
 			_model.IsLoading = false;
 		}
 
 		async void ItemTapped(object sender, ItemTappedEventArgs args)
 		{
+		 	await ItemTappedAsync (sender, args);
+		}
+
+		async Task ItemTappedAsync (object sender, ItemTappedEventArgs args)
+		{
 			_model.IsLoading = true;
 
-			await ShowFullInfoArtistPage (args);
+			await NavigateToFullInfoPage (args);
 
 			_model.IsLoading = false;
 		}
 
-		async void ScrollItemAppearing(object sender, ItemVisibilityEventArgs args)
+		async void GetMoreSearchResults (object sender, EventArgs args)
 		{
-			var artist = (ArtistListViewModel)args.Item;
+			await GetMoreSearchResultsAsync (sender, args);
+		}
 
-			var currentListCount = _model.ArtistList.Count;
-			var artistIndex = _model.ArtistList.IndexOf(artist);
+		async Task GetMoreSearchResultsAsync (object sender, EventArgs args)
+		{
+			_model.IsLoading = true;
 
-			if (currentListCount > previousListCount && (artistIndex + itemsVisibleThreshold) >= currentListCount) 
-			{
-				previousListCount = currentListCount;
-				await Get10MoreSearchResults ();
-			}	
+			var searchResult = await LFMService.Instance.Search (searchTerm, 5, ++_startIndex);
+
+			await BindViewModel (searchResult);
+
+			_model.IsLoading = false;
 		}
 
 		// additional methods
-		async Task SearchForArtistAndBindViewModel()
+
+		async Task<IEnumerable<ViewModel>> GetSearchResult()
 		{
 			_startIndex = 1;
-			previousListCount = 0;
-			_model.ArtistList.Clear ();
+			_model.SearchResult.Clear ();
 
 			searchTerm = btnSearch.Text;
+			btnLoadMoreResults.IsVisible = false;
 
-			var artists = await LFMService.Instance.SearchArtist (searchTerm, _startIndex);
+			var searchResult = await LFMService.Instance.Search (searchTerm, 5, _startIndex );
+			return searchResult;
+		}
 
-			foreach (var artist in artists) {
-				_model.ArtistList.Add (artist);
+		async Task BindViewModel (IEnumerable<ViewModel> searchResult)
+		{
+			_model.GroupedItems.Clear ();
+
+			foreach (var item in searchResult) {
+				_model.SearchResult.Add (item);
+			}
+
+			var groupedViewModel = await GroupViewModel(_model.SearchResult);
+
+			foreach (var item in groupedViewModel) {
+				_model.GroupedItems.Add (item);
 			}
 		}
 
-		async Task ShowFullInfoArtistPage(ItemTappedEventArgs args)
+		async Task NavigateToFullInfoPage(ItemTappedEventArgs args)
 		{
-			var artist = (ArtistListViewModel)args.Item;
-			var fullinfoPage = new ArtistFullInfoPage (artist.Name);
-			await Navigation.PushAsync(fullinfoPage);
-		}
+			var item = (ViewModel)args.Item;
 
-		async Task Get10MoreSearchResults ()
-		{
-			var artists = await LFMService.Instance.SearchArtist (searchTerm, ++_startIndex);
-
-			foreach (var artist in artists) {
-				_model.ArtistList.Add (artist);
+			if (item.Type.Equals ("Artist")) 
+			{
+				var page = new ArtistFullInfoPage (item.Name);
+				await Navigation.PushAsync (page);
+			} 
+			else if (item.Type.Equals ("Album")) 
+			{
+				var page = new AlbumFullInfoPage (item.Name, item.Mbid, item.Artist);
+				await Navigation.PushAsync (page);
 			}
+		}	
+
+		Task<IEnumerable<Group<string, ViewModel>>> GroupViewModel(ObservableCollection<ViewModel> items)
+		{
+			return Task.Run (() => {
+
+				var sortedItems = items
+					.GroupBy (vm => vm.Type)
+					.Select (vm => new Group<string, ViewModel> (vm.Key, vm));
+				return sortedItems;
+			});
 		}
 	}
 }
