@@ -70,7 +70,6 @@ namespace XamarinLastfm
 			return albumToView;
 		}
 
-
 		// Additional methods
 		private async Task<IEnumerable<ViewModel>> CreateArtistListViewModel(IEnumerable<Artist> artists)
 		{
@@ -82,6 +81,7 @@ namespace XamarinLastfm
 							ImageSource = artist.Image.FirstOrDefault().Value,
 							Type = "Artist"
 						});	
+
 					return viewModel;
 				}
 			var emptyViewModel = await CreateEmptyViewModel("No artist matches", "Artist");

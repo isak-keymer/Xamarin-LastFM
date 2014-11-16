@@ -99,7 +99,9 @@ namespace XamarinLastfm
 			_model.GroupedItems.Clear ();
 
 			foreach (var item in searchResult) {
-				_model.SearchResult.Add (item);
+				if (!_model.SearchResult.Any(vm => vm.Name.Equals(item.Name) && vm.Mbid == item.Mbid)) {
+					_model.SearchResult.Add (item);
+				}
 			}
 
 			var groupedViewModel = await GroupViewModel(_model.SearchResult);
