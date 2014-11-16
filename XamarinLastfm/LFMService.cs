@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.Globalization;
+using System.Net;
 
 namespace XamarinLastfm
 {
@@ -167,7 +168,12 @@ namespace XamarinLastfm
 				var contentSummary = Regex.Replace (contentNoHTML, "Read more about.*", string.Empty);
 				contentSummary.Trim ();
 
-				return contentSummary;
+
+
+				var decoded = WebUtility.HtmlDecode (contentSummary);
+
+
+				return decoded;
 			});
 		}
 	}
