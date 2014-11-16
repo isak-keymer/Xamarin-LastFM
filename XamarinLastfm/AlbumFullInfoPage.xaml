@@ -18,8 +18,8 @@
 						<ViewCell>
 							<StackLayout Orientation="Horizontal" Padding="0,5,0,5">
 								<StackLayout Padding="5,0,0,0" Orientation="Vertical">
-								<Label Text="{Binding Artist.Name, StringFormat='Artist {0}'}" Font="20" YAlign="Center" TextColor="#333" />
-				            		<Label Text="{Binding Name, StringFormat='Track: {0}'}" Font="20" YAlign="Center" TextColor="#333" />
+<!--								<Label Text="{Binding Artist.Name, StringFormat='Artist {0}'}" Font="20" YAlign="Center" TextColor="#333" />-->
+				            		<Label Text="{Binding NameToView, StringFormat='{0}'}" Font="20" YAlign="Center" TextColor="#333" />
 				            	</StackLayout>        	
 				      		</StackLayout>
 				      	</ViewCell>

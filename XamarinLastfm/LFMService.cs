@@ -59,13 +59,6 @@ namespace XamarinLastfm
 		{
 			var album = await _repository.GetAlbumFullInfo(albumName, albumMbid, artistName);
 
-			if (album.Tracks.TrackList == null) {
-				album.Tracks.TrackList = new List<Track> { new Track { Name = "Track 1", Artist = new Artist { Name = "Abba" }},
-					new Track { Name = "Track 2", Artist = new Artist { Name = "Abba2" }},
-					new Track { Name = "Track 3", Artist = new Artist { Name = "Abba3" }},
-					new Track { Name = "Track 4", Artist = new Artist { Name = "Abba4" }}};
-			}
-
 			var albumToView =  new AlbumFullInfoViewModel {
 				Name= album.Name,
 				Id = album.Id,
