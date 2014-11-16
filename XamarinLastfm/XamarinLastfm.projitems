@@ -59,6 +59,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\LFMResponses\GetAlbumsForArtist\ArtistTopAlbum.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\GeneralClasses\Group.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ErrorListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />

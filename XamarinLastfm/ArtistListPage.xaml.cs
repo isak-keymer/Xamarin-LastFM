@@ -113,15 +113,19 @@ namespace XamarinLastfm
 		{
 			var item = (ViewModel)args.Item;
 
-			if (item.Type.Equals ("Artist")) 
-			{
-				var page = new ArtistFullInfoPage (item.Name);
-				await Navigation.PushAsync (page);
-			} 
-			else if (item.Type.Equals ("Album")) 
-			{
-				var page = new AlbumFullInfoPage (item.Name, item.Mbid, item.Artist);
-				await Navigation.PushAsync (page);
+			if (!item.Name.Equals("No artist matches")) {
+				if (item.Type.Equals ("Artist")) 
+				{
+					var page = new ArtistFullInfoPage (item.Name);
+					await Navigation.PushAsync (page);
+				} 
+				if (!item.Name.Equals("No album matches")) {
+					if (item.Type.Equals ("Album")) 
+					{
+						var page = new AlbumFullInfoPage (item.Name, item.Mbid, item.Artist);
+						await Navigation.PushAsync (page);
+					}
+				}
 			}
 		}	
 

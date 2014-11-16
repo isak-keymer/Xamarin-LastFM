@@ -79,41 +79,44 @@ namespace XamarinLastfm
 
 
 		// Additional methods
-		private Task<IEnumerable<ViewModel>> CreateArtistListViewModel(IEnumerable<Artist> artists)
+		private async Task<IEnumerable<ViewModel>> CreateArtistListViewModel(IEnumerable<Artist> artists)
 		{
-			return Task.Run(() => { 
-
-				var viewModel = artists
-					.Select (artist => new ViewModel { 
-						Name = artist.Name, 
-						Mbid = artist.Mbid,
-						ImageSource = artist.Image.FirstOrDefault().Value,
-						Type = "Artist"
-					});	
-				return viewModel;
-			});
+				if (artists != null) {
+					var viewModel = artists
+						.Select (artist => new ViewModel { 
+							Name = artist.Name, 
+							Mbid = artist.Mbid,
+							ImageSource = artist.Image.FirstOrDefault().Value,
+							Type = "Artist"
+						});	
+					return viewModel;
+				}
+			var emptyViewModel = await CreateEmptyViewModel("No artist matches", "Artist");
+			return emptyViewModel;
 		}
 
-		private Task<IEnumerable<ViewModel>> CreateAlbumListForArtistViewModel(IEnumerable<ArtistTopAlbum> albums)
+		private async Task<IEnumerable<ViewModel>> CreateAlbumListForArtistViewModel(IEnumerable<ArtistTopAlbum> albums)
 		{
-			return Task.Run(() => { 
+			if (albums != null) {
+					var viewModel = albums
+						.Select (album => new ViewModel { 
+							Name = album.Name, 
+							Mbid = album.Mbid,
+							ImageSource = album.Image.FirstOrDefault().Value,
+							Type = "Album",
+							Artist = album.Artist.Name
+						});	
 
-				var viewModel = albums
-					.Select (album => new ViewModel { 
-						Name = album.Name, 
-						Mbid = album.Mbid,
-						ImageSource = album.Image.FirstOrDefault().Value,
-						Type = "Album",
-						Artist = album.Artist.Name
-					});	
+					return viewModel;
+				}
 
-				return viewModel;
-			});
+			var emptyViewModel = await CreateEmptyViewModel("No albums for this artist", "Album");
+			return emptyViewModel;
 		}
 
-		private Task<IEnumerable<ViewModel>> CreateSearchedAlbumListViewModel(IEnumerable<SearchedAlbum> albums)
+		private async Task<IEnumerable<ViewModel>> CreateSearchedAlbumListViewModel(IEnumerable<SearchedAlbum> albums)
 		{
-			return Task.Run(() => { 
+			if (albums != null) {
 
 				var viewModel = albums
 					.Select (album => new ViewModel { 
@@ -124,21 +127,11 @@ namespace XamarinLastfm
 						Artist = album.Artist
 					});	
 
-				return viewModel;
-			});
-		}
+				return viewModel;	
+			}			
 
-		private Task<IEnumerable<Group<string, ViewModel>>> CreateGroupedViewModel (IEnumerable<ViewModel> artistsToViewModel, IEnumerable<ViewModel> albumsToViewModel)
-		{
-			return Task.Run (() => {
-				var viewModelList = artistsToViewModel.Concat(albumsToViewModel);
-
-				var sortedItems = viewModelList
-					.GroupBy (vm => vm.Type)
-					.Select (vm => new Group<string, ViewModel> (vm.Key, vm));
-
-				return sortedItems;
-			});
+			var emptyViewModel = await CreateEmptyViewModel("No album matches", "Album");
+			return emptyViewModel;
 		}
 
 		private async Task<ArtistFullInfoViewModel> CreateArtistFullViewModel (ArtistFullInfo artist, IEnumerable<ViewModel> albums)
@@ -160,6 +153,17 @@ namespace XamarinLastfm
 			};
 
 			return artistToViewModel;
+		}
+
+		private Task<IEnumerable<ViewModel>> CreateEmptyViewModel (string message, string type)
+		{
+			return Task.Run (() => {
+
+				ViewModel viewModel = new ArtistListViewModel { Name = message, Type = type  };
+				IEnumerable<ViewModel> emptyViewModel = new[]{ viewModel };
+
+				return emptyViewModel;
+			});
 		}
 
 		private Task<string> FilterContent (string summary)

@@ -12,44 +12,60 @@ namespace XamarinLastfm
 		{
 			var request = await CreateRestRequest ("artist.search", "artist", artistToSearch, numberOfResults, page); 
 			var response = await ReceiveRestResponse<ArtistSearchResponse> (request);
-			var artists = response.Results.Artistmatches.Artists;
-			return artists;
-		}
+			if (response != null) {
+				var artists = response.Results.Artistmatches.Artists;
+				return artists;
+			}
+			return null;
 
-		public async Task<ArtistFullInfo> GetArtistFullInfo (string artistName)
-		{
-			var request = await CreateRestRequest ("artist.getInfo", "artist", artistName ); 
-			var response = await ReceiveRestResponse<ArtistGetInfoResponse> (request);
-			var artist = response.Artist;
-
-			return artist;
-		}
-
-		public async Task<IEnumerable<ArtistTopAlbum>> GetAlbumsForArtist (string artistName)
-		{
-			var request = await CreateRestRequest ("artist.gettopalbums", "artist", artistName); 
-			var response = await ReceiveRestResponse<AlbumSearchResponse> (request);
-			var albums = response.TopAlbums.Albums;
-
-			return albums;
 		}
 
 		public async Task<IEnumerable<SearchedAlbum>> SearchAlbums (string album, int numberOfResults, int? page = null)
 		{
 			var request = await CreateRestRequest ("album.search", "album", album, numberOfResults, page ); 
 			var response = await ReceiveRestResponse<AlbumSearchResult> (request);
-			var albums = response.Results.AlbumMatches.Albums;
 
-			return albums;
+			if (response != null) {
+				var albums = response.Results.AlbumMatches.Albums;
+				return albums;
+			}
+			return null;
+		}
+
+		public async Task<ArtistFullInfo> GetArtistFullInfo (string artistName)
+		{
+			var request = await CreateRestRequest ("artist.getInfo", "artist", artistName ); 
+			var response = await ReceiveRestResponse<ArtistGetInfoResponse> (request);
+
+			if (response != null) {
+				var artist = response.Artist;
+				return artist;
+			}
+			return null;
+		}
+
+		public async Task<IEnumerable<ArtistTopAlbum>> GetAlbumsForArtist (string artistName)
+		{
+			var request = await CreateRestRequest ("artist.gettopalbums", "artist", artistName); 
+			var response = await ReceiveRestResponse<AlbumSearchResponse> (request);		
+
+			if (response != null) {
+				var albums = response.TopAlbums.Albums;
+				return albums;
+			}
+			return null;
 		}
 
 		public async Task<AlbumFullInfo> GetAlbumFullInfo (string albumName, string albumMbid, string artistName)
 		{
 			var request = await CreateRestRequest ("album.getInfo", "album", albumName, null, null, albumMbid, artistName ); 
 			var response = await ReceiveRestResponse<AlbumGetInfoResponse> (request);
-			var album = response.Album;
-
-			return album;
+		
+			if (response != null) {
+				var album = response.Album;
+				return album;
+			}
+			return null;
 		}
 
 		// Method for creating request and add parameters to the request
