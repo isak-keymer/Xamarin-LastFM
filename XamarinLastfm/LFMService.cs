@@ -168,12 +168,9 @@ namespace XamarinLastfm
 				var contentSummary = Regex.Replace (contentNoHTML, "Read more about.*", string.Empty);
 				contentSummary.Trim ();
 
-
-
 				var decoded = WebUtility.HtmlDecode (contentSummary);
 
-
-				return decoded;
+				return decoded.Trim ();
 			});
 		}
 	}
